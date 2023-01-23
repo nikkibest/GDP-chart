@@ -1,0 +1,27 @@
+* {
+    background-color: gray; 
+}
+
+body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+}
+
+#card {
+    padding: 0px;
+    margin: 0px auto;
+    width: 1050px;
+    height: 600px;
+    #title {
+        height: 20%;
+        background-color: white;
+    }
+    #chart {
+        height: 60%;
+        background-color: white;
+    }
+    #undertitle {
+        height: 20%;
+        background-color: white;
+    }
+}
