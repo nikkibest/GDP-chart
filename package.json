@@ -1,0 +1,19 @@
+{
+  "name": "tsd",
+  "version": "1.0.0",
+  "description": "Freecodecamp project with GDP chart using d3",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikkibest/GDP-chart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikkibest/GDP-chart/issues"
+  },
+  "homepage": "https://github.com/nikkibest/GDP-chart#readme"
+}
