@@ -13,6 +13,8 @@ body {
     width: 1050px;
     height: 600px;
     #title {
+        font-size: large;
+        font-weight: bold;
         height: 20%;
         background-color: white;
     }
@@ -20,8 +22,10 @@ body {
         height: 60%;
         background-color: white;
     }
-    #undertitle {
+    #supbar {
         height: 20%;
         background-color: white;
+        font-size: medium;
+        font-weight: bold;
     }
 }
