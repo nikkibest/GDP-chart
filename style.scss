@@ -12,20 +12,25 @@ body {
     margin: 0px auto;
     width: 1050px;
     height: 600px;
-    #title {
-        font-size: large;
+    .boards {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .title {
+        font-size: 30px;
         font-weight: bold;
         height: 20%;
-        background-color: white;
+        border: solid;
     }
-    #chart {
+    .chart {
         height: 60%;
-        background-color: white;
     }
-    #supbar {
+    .supbar {
         height: 20%;
-        background-color: white;
         font-size: medium;
         font-weight: bold;
+        border: solid;
     }
 }

@@ -14,18 +14,34 @@ body {
   height: 600px;
 }
 
-#card #title {
-  height: 20%;
+#card .boards {
   background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-#card #chart {
+#card .title {
+  font-size: 30px;
+  font-weight: bold;
+  height: 20%;
+  border: solid;
+}
+
+#card .chart {
   height: 60%;
-  background-color: white;
 }
 
-#card #undertitle {
+#card .supbar {
   height: 20%;
-  background-color: white;
+  font-size: medium;
+  font-weight: bold;
+  border: solid;
 }
 /*# sourceMappingURL=style.css.map */
