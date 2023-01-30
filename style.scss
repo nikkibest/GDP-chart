@@ -1,5 +1,8 @@
+$color6: #99d8c9;
+$color7: #e5f5f9;
+
 * {
-    background-color: gray; 
+    background-color: $color6; 
 }
 
 body {
@@ -13,7 +16,8 @@ body {
     width: 1050px;
     height: 600px;
     .boards {
-        background-color: white;
+        //background-color: white;
+        background: $color7;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,4 +37,12 @@ body {
         font-weight: bold;
         border: solid;
     }
+}
+
+svg {
+    background: $color7;
+  }
+
+.tooltip {
+    background-color: $color6; 
 }
