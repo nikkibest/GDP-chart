@@ -12,10 +12,9 @@
 
 const url = 'https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json';
 const margin = {top: 10, right: 10, bottom: 20, left: 60}
-const widthOfSvg = 1050 - margin.right - margin.left,
-heightOfSvg = 600*.6 - margin.top - margin.bottom;
+const widthOfSvg = 1050 - margin.right - margin.left;
+const heightOfSvg = 800*.6 - margin.top - margin.bottom;
 const padding = 60;
-let url_data = []
 
 async function getData() {
   try {
@@ -89,8 +88,9 @@ async function getData() {
     .style('fill', (d,i) => color(i))
     .attr("width", xScaleBandwidth) //Bandwidth is the distance between two points
     .attr("x", (d,i) => xScale(i))
-    .attr("height", d => heightOfSvg - yScale(d[1]))        // 
-    .attr("y", d => yScale(d[1]))   //heightOfSvg - d[1]/5)
+    .attr("height", 0)//d => heightOfSvg - yScale(d[1]))        // 
+    .attr("y", heightOfSvg)//d => yScale(d[1]))   //heightOfSvg - d[1]/5)
+
     //Add effect to tooltip when hover on
     .on('mouseover', function(d) { 
       // Get data
@@ -119,6 +119,7 @@ async function getData() {
         .style('opacity', 0.5)
         .style('fill','yellow')
     })
+    
     //Add effect to tooltip when hover off
     .on('mouseout', function(d) {
       // Remove tooltip
@@ -129,21 +130,31 @@ async function getData() {
         .style('opacity',1)
         .style('fill', tempColor)
     })
-
-    chart.transition()
-      .delay((d,i) => i*5)
-      .duration(2000)
+    // Add transition to the chart
+    .transition()
+      .attr("height", (d,i) => heightOfSvg - yScale(d[1]))
+      .attr('y', d => yScale(d[1]))
+      .delay((d, i) => i * 5)
+      .duration(1000)
       .ease(d3.easeElastic)
-      // .attr('height', d => yScale(d[1]))
-      // .attr("y", d => heightOfSvg-yScale(d[1]))
 
     chart.append("g")
       .attr("transform", "translate(0, " + (heightOfSvg) +")")
+      .classed('axis', true)
       .attr('id','x-axis')
       .call(xAxis)
     chart.append("g")
       .attr("transform", "translate(" + (0) +", 0)")
+      .classed('axis', true)
+      .attr('id','y-axis')
       .call(yAxis);
+
+    let gdpText = d3.select('svg')
+      .append('text')
+        .classed('gdpText', true)
+        .text('GDP, Billions of US Dollars')
+        .attr('transform', 'translate(' + (margin.left + 20) + ', ' + margin.top + ') rotate(-90)')
+        .style('text-anchor', 'end')
   } catch (err) {
     console.log(err)
   }

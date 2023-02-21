@@ -11,36 +11,29 @@ body {
   padding: 0px;
   margin: 0px auto;
   width: 1050px;
-  height: 600px;
+  height: 800px;
 }
-
 #card .boards {
   background: #e5f5f9;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
-
 #card .title {
   font-size: 30px;
   font-weight: bold;
-  height: 20%;
+  height: 10%;
 }
-
 #card .chart {
   height: 60%;
 }
-
 #card .supbar {
-  height: 20%;
+  height: 10%;
   font-size: medium;
-  font-weight: bold;
+  font-style: italic;
+}
+#card .chart .axis {
+  font-size: 15px;
 }
 
 svg {
@@ -49,5 +42,4 @@ svg {
 
 .tooltip {
   background-color: #99d8c9;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

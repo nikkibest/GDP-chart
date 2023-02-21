@@ -14,7 +14,7 @@ body {
     padding: 0px;
     margin: 0px auto;
     width: 1050px;
-    height: 600px;
+    height: 800px;
     .boards {
         //background-color: white;
         background: $color7;
@@ -25,15 +25,20 @@ body {
     .title {
         font-size: 30px;
         font-weight: bold;
-        height: 20%;
+        height: 10%;
     }
     .chart {
         height: 60%;
     }
     .supbar {
-        height: 20%;
+        height: 10%;
         font-size: medium;
-        font-weight: bold;
+        font-style: italic;
+    }
+    .chart{
+        .axis{
+            font-size: 15px;
+        }
     }
 }
 
