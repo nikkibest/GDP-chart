@@ -26,29 +26,37 @@ async function getData() {
     document.getElementsByClassName("title")[0].innerHTML = allData["name"];
     document.getElementsByClassName("supbar")[0].innerHTML = allData["description"];
 
+    let xScaleBandwidth = widthOfSvg / data.length;
+
     // Calculate parameters for the d3 element
-    const xScale = d3.scaleBand()
-      .domain(d3.range(0, data.length))
+    const xScale = d3.scaleLinear()
+      .domain([0, data.length-1])
       .range([0, widthOfSvg])
+    
+    let datesArray = data.map((item) => {
+      return new Date(item[0])
+    });
+    console.log(d3.extent(datesArray))
+
+    const xAxisTime = d3.scaleTime()
+      .domain(d3.extent(datesArray))
+      .range([0, widthOfSvg])
+
+    const xAxis = d3.axisBottom(xAxisTime);
 
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => d[1])])
-      .range([0, heightOfSvg])
+      .range([heightOfSvg, 0])
+    
+    const yAxis = d3.axisLeft(yScale);
 
     const color = d3.scaleLinear()
       .domain([0, data.length*.33, data.length*.66, data.length])
       .range(['#B58929', '#C61C6F', '#268BD2', '#85992C'])
 
-    const xAxis = d3.axisBottom(xScale)
-    const yAxis = d3.axisLeft(yScale)
     let tempColor; // Temporary color holder, when mouse hovers over d3 element
 
-    const months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
-
-    console.log(xScale(2))
-    console.log(xScale.bandwidth())
-    console.log('transform', 'translate(0,' + margin.top + ',0,' + margin.bottom + ')')
-
+    const months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
     //////////////// Create tooltip - the pop up message when you hover //////////////////
     let tooltip = d3.select('.chart')
@@ -79,14 +87,14 @@ async function getData() {
     .data(data)
     .enter().append("rect")
     .style('fill', (d,i) => color(i))
-    .attr("width", xScale.bandwidth()) //Bandwidth is the distance between two points
+    .attr("width", xScaleBandwidth) //Bandwidth is the distance between two points
     .attr("x", (d,i) => xScale(i))
-    .attr("height", d => yScale(d[1]))
-    .attr("y", d => heightOfSvg-yScale(d[1]))//heightOfSvg - d[1]/5)
+    .attr("height", d => heightOfSvg - yScale(d[1]))        // 
+    .attr("y", d => yScale(d[1]))   //heightOfSvg - d[1]/5)
     //Add effect to tooltip when hover on
     .on('mouseover', function(d) { 
       // Get data
-      rect_data = d.target.__data__
+      let rect_data = d.target.__data__
       //Display tooltip
       tooltip.transition()
         .style('display', 'block')
@@ -102,8 +110,8 @@ async function getData() {
       })
       // Orient tooltip
       tooltip
-        .style('left', (d.pageX - 125) + 'px') // can use: screenX, pageX, layerX, clientX or x
-        .style('top', (d.pageY - 75) + 'px')
+        .style('left', (d.pageX - 145) + 'px') // can use: screenX, pageX, layerX, clientX or x
+        .style('top', (d.pageY - 45) + 'px')
       //Save temporary color
       tempColor = this.style.fill
       //Set new color of rect
@@ -122,25 +130,20 @@ async function getData() {
         .style('fill', tempColor)
     })
 
-    
-
     chart.transition()
       .delay((d,i) => i*5)
       .duration(2000)
       .ease(d3.easeElastic)
       // .attr('height', d => yScale(d[1]))
       // .attr("y", d => heightOfSvg-yScale(d[1]))
-      
 
-    // chart.append("g")
-    //   .attr("transform", "translate(0," + (heightOfSvg - padding) + ")")
-    //   .call(xAxis)
-
-    // chart.append("g")
-    // .attr("transform", "translate(" + (padding) + ",0)")
-    // .call(yAxis)
-
-    //console.log(data)
+    chart.append("g")
+      .attr("transform", "translate(0, " + (heightOfSvg) +")")
+      .attr('id','x-axis')
+      .call(xAxis)
+    chart.append("g")
+      .attr("transform", "translate(" + (0) +", 0)")
+      .call(yAxis);
   } catch (err) {
     console.log(err)
   }
