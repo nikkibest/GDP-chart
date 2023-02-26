@@ -65,6 +65,7 @@ async function getData() {
     .style('padding', '2px 10px')
     .style('display', 'none')
     .style('border-radius', '5px')
+    .attr("id", "tooltip")
 
     // Add two divs in it for the text to add
     tooltip.append('div')
@@ -90,7 +91,7 @@ async function getData() {
     .attr("x", (d,i) => xScale(i))
     .attr("height", 0)//d => heightOfSvg - yScale(d[1]))        // 
     .attr("y", heightOfSvg)//d => yScale(d[1]))   //heightOfSvg - d[1]/5)
-
+    .classed("bar",true)
     //Add effect to tooltip when hover on
     .on('mouseover', function(d) { 
       // Get data
@@ -130,7 +131,7 @@ async function getData() {
         .style('opacity',1)
         .style('fill', tempColor)
     })
-    // Add transition to the chart
+    // Add elastic transition effect to the chart
     .transition()
       .attr("height", (d,i) => heightOfSvg - yScale(d[1]))
       .attr('y', d => yScale(d[1]))
