@@ -1,15 +1,3 @@
-// Get api data
-  // use fetch and display with console log
-// make api data accessible in JS script
-// build html element with svg 
-  // have overall layer
-  // Title
-  // d3
-  // undertitle
-// link that element to div in html
-// style stuff with css 
-
-
 const url = 'https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json';
 const margin = {top: 10, right: 10, bottom: 20, left: 60}
 const widthOfSvg = 1050 - margin.right - margin.left;
@@ -32,6 +20,7 @@ async function getData() {
       .domain([0, data.length-1])
       .range([0, widthOfSvg])
     
+    console.log(data[0][0])
     let datesArray = data.map((item) => {
       return new Date(item[0])
     });
@@ -73,7 +62,7 @@ async function getData() {
     tooltip.append('div')
       .classed('year',true)
 
-    ///////////// Create d3 element and add data to it //////////////////
+    /////////////  Create d3 element and add data to it //////////////////
     // Chart size setup
     let chart = d3.select(".chart")
     .append("svg")
